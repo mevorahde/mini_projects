@@ -1,11 +1,11 @@
-from tkinter import *
-from tkinter import ttk
+import tkinter as tk
+from tkinter.font import Font
 from PIL import ImageTk, Image
 import random
 
-global logo
+# A dictionary of number 1-32 for the key and the values are a second dictionary for team information: name and logo.
 nfl_teams = {
-    1: {'Name': 'Arizona Cardinals', 'Logo':'Arizona-Cardinals-logo-vector.jpg'},
+    1: {'Name': 'Arizona Cardinals', 'Logo': 'Arizona-Cardinals-logo-vector.jpg'},
     2: {'Name': 'Chicago Bears', 'Logo': 'chicago-bears-logo-vector.png'},
     3: {'Name': 'Green Bay Packers', 'Logo': 'green-bay-packers-logo-vector.png'},
     4: {'Name': 'New York Giants', 'Logo': 'new-york-giants-logo-vector.png'},
@@ -17,7 +17,7 @@ nfl_teams = {
     10: {'Name': 'San Francisco 49ers', 'Logo': 'san-francisco-49ers-logo-vector.png'},
     11: {'Name': 'Cleveland Browns', 'Logo': 'cleveland-browns-logo-vector-download.jpg'},
     12: {'Name': 'Indianapolis Colts', 'Logo': 'indianapolis-colts-logo-vector-download.jpg'},
-    13: {'Name': 'Dallas Cowboys', 'Logo':  'dallas-cowboys-logo-vector.png'},
+    13: {'Name': 'Dallas Cowboys', 'Logo': 'dallas-cowboys-logo-vector.png'},
     14: {'Name': 'Kansas City Chiefs', 'Logo': 'kansas-city-chiefs-logo-vector-download.jpg'},
     15: {'Name': 'Los Angeles Chargers', 'Logo': 'san-diego-chargers-logo-vector.png'},
     16: {'Name': 'Denver Broncos', 'Logo': 'denver-broncos-logo-vector.png'},
@@ -39,29 +39,79 @@ nfl_teams = {
     32: {'Name': 'Houston Texans', 'Logo': 'houston-texans-logo-vector.png'}
 }
 
+win = tk.Tk()
+win.geometry('1000x1000')  # set window size
+win.resizable(0, 0)  # fix window
+panel = tk.Label(win)
+panel.pack()
 
-def show_image():
-    global logo
+
+def team():
+    # Set global variable for team name and the program label slot
+    global team_name
+    global tnl
+    # create a list
+    images = []
+    # Get a Random number from 1 to 32
     user_num = random.randint(1, 32)
-    # print(user_num)
-    # print(nfl_teams[user_num])
-    for n, team_info in nfl_teams.items():
-        if n == user_num:
-            print("You are a fan of the: {}!".format(team_info['Name']))
+
+    # Get all data from the 'nfl_teams' dictionary
+    for number, team_info in nfl_teams.items():
+        # Match the random, user number with the number from the 'nfl_teams' dictionary
+        if number == user_num:
+            # Get the Team Name and Logo information that goes with the matched number
+            team_name = "You are a fan of the: {}!".format(team_info['Name'])
             logo = "team_logo_images\\{}".format(team_info['Logo'])
-        lbl1.configure(image=image_tk)
+            # Append the logo to the list
+            images.append(logo)
+    return images
 
 
-root = Tk()
-c = ttk.Frame(root, padding=(5, 5, 12, 0))
-c.grid(column=0, row=0, sticky=(N, W, E, S))
-root.grid_columnconfigure(0, weight=1)
-root.grid_rowconfigure(0, weight=1)
-fname = "team_logo_images\\san-francisco-49ers-logo-vector.png"
-# fname = logo
-image_tk = ImageTk.PhotoImage(Image.open(fname))
-btn = ttk.Button(c, text="Click Here To Begin!", command=show_image)
-lbl1 = ttk.Label(c)
-btn.grid(column=0, row=0, sticky=N, pady=5, padx=5)
-lbl1.grid(column=1, row=1, sticky=N, pady=5, padx=5)
-root.mainloop()
+def load_image(img):
+    # load the image and display it
+    img = Image.open(img)
+    img = ImageTk.PhotoImage(img)
+    panel.img = img  # keep a reference so it's not garbage collected
+    panel['image'] = img
+
+
+def start_img():
+    # Starting function for the app, show the NFL logo, instructions for the user in a label and a button to click to
+    # start the goal of the program
+    img = "team_logo_images\\nfl-logo-National-Football-League.png"
+    load_image(img)
+
+
+def next_img():
+    try:
+        a = team()
+        # Show the user what team they are a 'fan' of
+        tnl.config(text=team_name)
+        # Change the button text to ask if the user wants to play again
+        btn.config(text="Play Again?!")
+        images = iter(a)  # make an iterator
+        img = next(images)  # get the next image from the iterator
+        team()
+    except ValueError:
+        return  # if there are no more images, do nothing
+    # Show the Team Logo image
+    load_image(img)
+
+
+# Main Font
+helv36 = Font(family='Helvetica', size=42, weight='bold')
+# Button for the user to start/continue the program
+btn = tk.Button(text='Click to Begin!', font="helv36", padx=5, pady=5, command=next_img)
+# Label to describe the user what to do and result
+tnl = tk.Label(win, text="Let's find out which NFL Team your a fan of!", font="helv36")
+tnl.pack()
+btn.pack(pady=25)
+
+# show the first image
+start_img()
+
+# App Title
+win.title("NFL Fan Generator")
+# App Favicon
+win.wm_iconbitmap("team_logo_images\\favicon.ico")
+win.mainloop()

@@ -39,12 +39,6 @@ nfl_teams = {
     32: {'Name': 'Houston Texans', 'Logo': 'houston-texans-logo-vector.png'}
 }
 
-win = tk.Tk()
-win.geometry('1000x1000')  # set window size
-win.resizable(0, 0)  # fix window
-panel = tk.Label(win)
-panel.pack()
-
 
 def team():
     # Set global variable for team name and the program label slot
@@ -83,21 +77,23 @@ def start_img():
 
 
 def next_img():
-    try:
-        a = team()
-        # Show the user what team they are a 'fan' of
-        tnl.config(text=team_name)
-        # Change the button text to ask if the user wants to play again
-        btn.config(text="Play Again?!")
-        images = iter(a)  # make an iterator
-        img = next(images)  # get the next image from the iterator
-        team()
-    except ValueError:
-        return  # if there are no more images, do nothing
+    a = team()
+    # Show the user what team they are a 'fan' of
+    tnl.config(text=team_name)
+    # Change the button text to ask if the user wants to play again
+    btn.config(text="Play Again?!")
+    images = iter(a)  # make an iterator
+    img = next(images)  # get the next image from the iterator
+    team()
     # Show the Team Logo image
     load_image(img)
 
 
+win = tk.Tk()
+win.geometry('1000x1000')  # set window size
+win.resizable(0, 0)  # fix window
+panel = tk.Label(win)
+panel.pack()
 # Main Font
 helv36 = Font(family='Helvetica', size=42, weight='bold')
 # Button for the user to start/continue the program

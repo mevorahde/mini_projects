@@ -1,8 +1,5 @@
 import tkinter as tk
-from tkinter.font import Font
 from tkinter import *
-import tkinter
-import tkinter.messagebox
 from PIL import Image
 from PIL import ImageTk
 import random
@@ -106,11 +103,8 @@ team_logo.lift()
 team_logo.pack()
 
 
-# panel.pack()
-# Main Font
-helv36 = Font(family='Helvetica', size=42, weight='bold')
 # Button for the user to start/continue the program
-btn = tk.Button(text='Click to Begin!', font="helv36", padx=5, pady=5, command=next_img)
+btn = tk.Button(text='Click to Begin!', padx=5, pady=5, command=next_img)
 # Label to describe the user what to do and result
 tnl = tk.Label(win, text="Let's find out which NFL Team your a fan of!", font="helv36")
 tnl.pack()

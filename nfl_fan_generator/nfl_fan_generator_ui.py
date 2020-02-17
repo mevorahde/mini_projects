@@ -106,7 +106,7 @@ team_logo.pack()
 # Button for the user to start/continue the program
 btn = tk.Button(text='Click to Begin!', padx=5, pady=5, command=next_img)
 # Label to describe the user what to do and result
-tnl = tk.Label(win, text="Let's find out which NFL Team your a fan of!", font="helv36")
+tnl = tk.Label(win, text="Let's find out which NFL Team you are a fan of!", font="helv36")
 tnl.pack()
 btn.pack(pady=25)
 

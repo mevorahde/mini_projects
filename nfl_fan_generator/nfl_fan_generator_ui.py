@@ -11,7 +11,7 @@ nfl_teams = {
     3: {'Name': 'Green Bay Packers', 'Logo': 'green-bay-packers-logo-vector.png'},
     4: {'Name': 'New York Giants', 'Logo': 'new-york-giants-logo-vector.png'},
     5: {'Name': 'Detroit Lions', 'Logo': 'detroit-lions-logo-vector-01.png'},
-    6: {'Name': 'Washington Redskins', 'Logo': 'washington-redskins-logo-vector.png'},
+    6: {'Name': 'Washington Football Team', 'Logo': 'washington-football-team.png'},
     7: {'Name': 'Philadelphia Eagles', 'Logo': 'philadelphia-eagles-logo.png'},
     8: {'Name': 'Pittsburgh Steelers', 'Logo': 'pittsburgh-steelers-logo-vector-01.png'},
     9: {'Name': 'Los Angeles Rams', 'Logo': 'st-louis-rams-vector-logo.png'},
@@ -24,7 +24,7 @@ nfl_teams = {
     16: {'Name': 'Denver Broncos', 'Logo': 'denver-broncos-logo-vector.png'},
     17: {'Name': 'New York Jets', 'Logo': 'new-york-jets-logo-vector-01.png'},
     18: {'Name': 'New England Patriots', 'Logo': 'new-england-patriots-logo-preview.png'},
-    19: {'Name': 'Oakland Raiders', 'Logo': 'oakland-raiders-logo-vector.png'},
+    19: {'Name': 'Las Vegas Raiders', 'Logo': 'las-vegas-raiders-logo-vector.png'},
     20: {'Name': 'Tennessee Titans', 'Logo': 'tennessee-titans-logo.png'},
     21: {'Name': 'Buffalo Bills', 'Logo': 'buffalo-bills-logo-vector-01.png'},
     22: {'Name': 'Minnesota Vikings', 'Logo': 'minnesota-vikings-logo-vector.png'},
@@ -106,7 +106,8 @@ team_logo.pack()
 # Button for the user to start/continue the program
 btn = tk.Button(text='Click to Begin!', padx=5, pady=5, command=next_img)
 # Label to describe the user what to do and result
-tnl = tk.Label(win, text="Let's find out which NFL Team you are a fan of!", font="helv36")
+tnl = tk.Label(
+    win, text="Let's find out which NFL Team you are a fan of!", font="helv36")
 tnl.pack()
 btn.pack(pady=25)
 
